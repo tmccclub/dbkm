@@ -1761,5 +1761,44 @@ function closeFacebookPost() {
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96a0790e32d6ba96',t:'MTc1NDMzNTg2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96a0790e32d6ba96',t:'MTc1NDMzNTg2NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+                <script>
+async function submitJoinForm(event) {
+  event.preventDefault();
+
+  const data = {
+    firstName: document.getElementById("joinFirstName").value,
+    lastName: document.getElementById("joinLastName").value,
+    phone: document.getElementById("joinPhone").value,
+    email: document.getElementById("joinEmail").value,
+    faculty: document.getElementById("joinFaculty").value,
+    specialization: document.getElementById("joinSpecialization").value,
+    level: document.getElementById("joinLevel").value,
+    studentId: document.getElementById("joinStudentId").value,
+    interests: Array.from(document.querySelectorAll('input[name="interests"]:checked')).map(cb => cb.value).join(", "),
+    experience: document.getElementById("joinExperience").value,
+    motivation: document.getElementById("joinMotivation").value
+  };
+
+  try {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbzdnq9KoU8x2zZfYX86I_BOyZXKzPslCfwH7QREY8nEnEWIUCYNJoNHjnBCE6mO3u-BUg/exec", {
+      method: "POST",
+      body: JSON.stringify(data)
+    });
+    const result = await response.json();
+    if (result.result === "success") {
+      alert("✅ تم إرسال طلبك بنجاح!");
+      closeJoinForm();
+    } else {
+      alert("❌ حدث خطأ، حاول مرة أخرى.");
+    }
+  } catch (err) {
+    alert("⚠️ لم يتم الاتصال بالخادم.");
+    console.error(err);
+  }
+}
+</script>
+
+ </body>
 </html>
